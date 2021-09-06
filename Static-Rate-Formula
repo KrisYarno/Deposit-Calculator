@@ -1,0 +1,18 @@
+// this function calculates and rounds the city, state, and occupancy tax - then adds to the daily rate and multiplies for the number of nights. If the daily rate isn't constant, do not use this function.
+
+function agodaCalc(num, nights) {
+	var taxa = num * 0.05;
+	var a = +(Math.round(taxa + "e+2")  + "e-2");
+	
+	var taxb = num * 0.02;
+	var b = +(Math.round(taxb + "e+2")  + "e-2");
+	
+	var taxc = num * 0.06;
+	var c = +(Math.round(taxc + "e+2")  + "e-2");
+
+	var rate = num + a + b + c;
+	var total = rate * nights;
+	return total.toFixed(2);
+	
+}
+console.log(agodaCalc('num', 'nights'));
