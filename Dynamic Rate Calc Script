@@ -1,0 +1,29 @@
+function calc(...test) {
+	test.forEach(function (x) {
+		let taxa = x * 0.05;
+		let a = +(Math.round(taxa + "e+2") + "e-2");
+
+		let taxb = x * 0.02;
+		let b = +(Math.round(taxb + "e+2") + "e-2");
+
+		let taxc = x * 0.06;
+		let c = +(Math.round(taxc + "e+2") + "e-2");
+
+		let rate = x + a + b + c;
+		console.log(rate.toFixed(2));
+    answer.push(rate.toFixed(2));
+	});
+}
+
+let answer = []
+
+function rates(...num) {
+  calc(...num);
+answer= answer.map(Number) ;
+const reducer = (accumulator, curr) => accumulator + curr;
+console.log(answer.reduce(reducer).toFixed(2));
+  console.log(answer);
+}
+
+//rates()
+//commented line 'rates()' is function to call. rates(200, 122, 322) would output individual calculations and a sum of nightly calculation to console. A variation of this script will be used to build the html page
