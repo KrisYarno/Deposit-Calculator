@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>agoda deposit calculator</title>
+</head>
+<body>
+<h1>Static Nightly Rate Calculator</h1>
+
+  <input type="number" placeholder="Nightly Rate" step="0.01" min="0" name="num" id="num"><br>
+  *
+  <br>
+  <input type="number" placeholder="Length of Stay" min="0" name="nights" id="nights"><br>
+  <button onclick="agodaCalc(document.getElementById('num').value,document.getElementById('nights').value)">Calculate</button>
+  <br>
+  <table>
+    <tr>
+      <th>Deposit = </th>
+      <th><p id="output"></p></th>
+    </tr>
+  </table>
+
+<script>
+  function agodaCalc(num, nights) {
+	var taxa = Number(num) * 0.05;
+	var a = +(Math.round(taxa + "e+2")  + "e-2");
+	
+	var taxb = Number(num) * 0.02;
+	var b = +(Math.round(taxb + "e+2")  + "e-2");
+	
+	var taxc = Number(num) * 0.06;
+	var c = +(Math.round(taxc + "e+2")  + "e-2");
+
+	var rate = Number(num) + a + b + c;
+	var total = rate * Number(nights);
+  document.getElementById("output").innerHTML = total.toFixed(2);
+	//alert(total.toFixed(2));
+}
+</script>
+<br>
+<br>
+<h1>Dynamic Nightly Rate Calculator</h1>
+Enter each night's rate with a space " " between each number<br>
+  <input type="text" placeholder="189.00, 194.33, 212, ..." step="0.01" name="r" id="r"><br>
+  <button onclick="rates(document.getElementById('r').value)" >Calculate</button>
+
+  <script>
+  function calc(...test) {
+	test.forEach(function (x) {
+    count.push(x);
+		let taxa = Number(x) * 0.05;
+		let a = +(Math.round(taxa + "e+2") + "e-2");
+
+		let taxb = Number(x) * 0.02;
+		let b = +(Math.round(taxb + "e+2") + "e-2");
+
+		let taxc = Number(x) * 0.06;
+		let c = +(Math.round(taxc + "e+2") + "e-2");
+
+		let rate = Number(x) + a + b + c;
+    answer.push(rate.toFixed(2));
+	});
+}
+let count = [""]
+let answer = []
+const space = ' '
+
+function rates (input) {
+answer.length = 0
+count.length = 0
+let r = input.split(space);
+  calc(...r);
+answer= answer.map(Number) ;
+const reducer = (accumulator, curr) => accumulator + curr;
+console.log(answer.reduce(reducer).toFixed(2));
+  console.log(answer);
+document.getElementById("output2").innerHTML = answer.reduce(reducer).toFixed(2);
+var countString = count.join(', ')
+document.getElementById("output1").innerHTML = countString;
+}
+</script>
+<br>
+<br>
+<textarea id="output1" name="output1" rows="3" cols="30"></textarea>
+<br>
+<textarea id="output2" name="output2" rows="2" cols="7"></textarea> deposit amount
+</body>
+</html>
